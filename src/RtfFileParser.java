@@ -20,6 +20,7 @@ public class RtfFileParser implements ScheduleParser {
     private int currentTabIndex = -1;
     private List<Integer> offsets = new ArrayList<>();
     private List<TableString> rawData = new ArrayList<>();
+    private List<String> strings = new ArrayList<>();
 
     private File file;
     private List<Record> records = new ArrayList<>();
@@ -42,12 +43,16 @@ public class RtfFileParser implements ScheduleParser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(rawData);
 
+        if (rawData.size() == 0) {
+            return records;
+        }
 
         rawData = new RawDataFilter(rawData).filter();
 
-        System.out.println(rawData);
+//        System.out.println(rawData);
+
+        records = new Records(rawData).createRecords();
 
         return records;
     }
@@ -94,8 +99,10 @@ public class RtfFileParser implements ScheduleParser {
             switch (commandName) {
                 //new paragraph
                 case "par":
-                    offsets.clear();
-                    currentTabIndex = -1;
+                    if (currentTabIndex != -1) {
+                        offsets.clear();
+                        currentTabIndex = -1;
+                    }
                     break;
 
                 case "tab":
@@ -106,6 +113,7 @@ public class RtfFileParser implements ScheduleParser {
                 case "tx":
                     //tab offset value
                     offsets.add(i);
+                    break;
             }
         }
 
