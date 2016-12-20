@@ -27,6 +27,7 @@ public class RtfFileParser implements ScheduleParser {
 
     public RtfFileParser(File file) {
         this.file = file;
+        System.out.println(file);
     }
 
 
