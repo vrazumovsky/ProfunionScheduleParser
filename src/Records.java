@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -41,6 +42,22 @@ public class Records {
                 firstIndex = i;
             }
         }
+
+        List<Integer> offsets = new ArrayList<>();
+
+        for (Record record : records) {
+            if (!offsets.contains(record.tabOffset)) {
+                offsets.add(record.tabOffset);
+            }
+        }
+
+        Collections.sort(offsets);
+
+        for (Record record : records) {
+            int groupIndex = offsets.indexOf(record.tabOffset);
+            record.group = groups.get(groupIndex);
+        }
+
 
         return records;
     }

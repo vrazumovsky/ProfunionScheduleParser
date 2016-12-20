@@ -24,6 +24,7 @@ public class Record {
                 ", name='" + name + '\'' +
                 ", group='" + group + '\'' +
                 ", teachers=" + teachers +
+                ", taboffset=" + tabOffset +
                 '}';
     }
 }
