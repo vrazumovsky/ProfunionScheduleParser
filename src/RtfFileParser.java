@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class RtfFileParser implements ScheduleParser {
 
+    private int currentTabIndex = -1;
+    private List<Integer> offsets = new ArrayList<>();
+    private List<TableString> rawData = new ArrayList<>();
+
     private File file;
     private List<Record> records = new ArrayList<>();
 
@@ -68,12 +72,35 @@ public class RtfFileParser implements ScheduleParser {
 
         @Override
         public void processString(String s) {
-
+            if (currentTabIndex == -1) {
+                return;
+            }
+            System.out.println(s);
+            if (offsets.size() != 0) {
+                rawData.add(new TableString(s, offsets.get(currentTabIndex)));
+            }
         }
 
         @Override
         public void processCommand(Command command, int i, boolean b, boolean b1) {
+            String commandName = command.getCommandName();
 
+            switch (commandName) {
+                //new paragraph
+                case "par":
+                    offsets.clear();
+                    currentTabIndex = -1;
+                    break;
+
+                case "tab":
+                    //next tab
+                    currentTabIndex++;
+                    break;
+
+                case "tx":
+                    //tab offset value
+                    offsets.add(i);
+            }
         }
 
     }
