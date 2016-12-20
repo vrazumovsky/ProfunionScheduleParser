@@ -17,6 +17,13 @@ public class TableString {
         return strings.contains(string);
     }
 
+    public String getString() {
+        return string;
+    }
+
+    public int getTabOffset() {
+        return tabOffset;
+    }
 
     @Override
     public String toString() {
