@@ -7,6 +7,7 @@ import java.util.List;
 public class FilesParser implements ScheduleParser {
 
     private File directory;
+    private List<Record> recordsFromAllFiles;
 
     public FilesParser(String directoryPath) {
         directory = new File(directoryPath);
@@ -17,6 +18,10 @@ public class FilesParser implements ScheduleParser {
 
     @Override
     public List<Record> parse() {
-        return null;
+        for (File file : directory.listFiles()) {
+            ScheduleParser parser = new RtfFileParser(file);
+            recordsFromAllFiles.addAll(parser.parse());
+        }
+        return recordsFromAllFiles;
     }
 }
