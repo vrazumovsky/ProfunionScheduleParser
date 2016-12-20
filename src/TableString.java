@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by vadim on 20/12/16.
  */
@@ -9,6 +11,10 @@ public class TableString {
     public TableString(String string, int tabOffset) {
         this.string = string;
         this.tabOffset = tabOffset;
+    }
+
+    public boolean matchesOneOf(List<String> strings) {
+        return strings.contains(string);
     }
 
 

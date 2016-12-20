@@ -42,6 +42,12 @@ public class RtfFileParser implements ScheduleParser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println(rawData);
+
+
+        rawData = new RawDataFilter(rawData).filter();
+
+        System.out.println(rawData);
 
         return records;
     }

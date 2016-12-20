@@ -17,4 +17,6 @@ public abstract class Record {
     public Record(List<String> rawData) {
         this.rawData = rawData;
     }
+
+
 }
