@@ -36,7 +36,7 @@ public class RtfFileParser implements ScheduleParser {
             IRtfListener listener = new RtfListener();
             parser.parse(source, listener);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return records;
