@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Created by vadim on 20/12/16.
@@ -12,7 +11,7 @@ public class Record {
     protected String name;
     protected String group;
     protected String type;
-    protected String tabOffset;
+    protected int tabOffset;
     protected List<String> teachers = new ArrayList<>();
 
 

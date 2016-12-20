@@ -42,8 +42,6 @@ public class Records {
             }
         }
 
-//        System.out.println(records);
-
         return records;
     }
 

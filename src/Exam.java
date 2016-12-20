@@ -15,6 +15,7 @@ public class Exam extends Record {
         startTime = rawData.get(2).getString();
         name = rawData.get(3).getString();
         type = "экзамен";
+        tabOffset = rawData.get(3).getTabOffset();
 
         for (TableString tableString : rawData.subList(4, rawData.size())) {
             teachers.add(tableString.getString());
