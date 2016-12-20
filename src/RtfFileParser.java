@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,6 +8,7 @@ import java.util.List;
 public class RtfFileParser implements ScheduleParser {
 
     private File file;
+    private List<Record> records = new ArrayList<>();
 
     public RtfFileParser(File file) {
         this.file = file;
@@ -16,6 +18,6 @@ public class RtfFileParser implements ScheduleParser {
     @Override
     public List<Record> parse() {
         //// TODO: 20/12/16
-        return null;
+        return records;
     }
 }
