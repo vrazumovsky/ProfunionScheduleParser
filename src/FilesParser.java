@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
 public class FilesParser implements ScheduleParser {
 
     private File directory;
-    private List<Record> recordsFromAllFiles;
+    private List<Record> recordsFromAllFiles = new ArrayList<>();
 
     public FilesParser(String directoryPath) {
         directory = new File(directoryPath);
