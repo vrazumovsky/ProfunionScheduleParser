@@ -18,7 +18,9 @@ public class Exam extends Record {
         tabOffset = rawData.get(3).getTabOffset();
 
         for (TableString tableString : rawData.subList(4, rawData.size())) {
-            teachers.add(tableString.getString());
+            String[] teacherAndCabinet = splitTeacherAndCabinet(tableString.getString());
+            Teacher teacher = new Teacher(teacherAndCabinet[0], teacherAndCabinet[1]);
+            teachers.add(teacher);
         }
     }
 
