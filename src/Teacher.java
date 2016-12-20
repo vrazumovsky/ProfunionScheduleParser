@@ -18,4 +18,12 @@ public class Teacher {
     public String getCabinet() {
         return cabinet;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "name='" + name + '\'' +
+                ", cabinet='" + cabinet + '\'' +
+                '}';
+    }
 }
