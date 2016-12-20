@@ -12,6 +12,10 @@ public class Main {
 
         List<Record> allRecords = parser.parse();
 
-        System.out.println(allRecords);
+//        System.out.println(allRecords);
+
+        for (Record record : allRecords) {
+            record.printQuery();
+        }
     }
 }

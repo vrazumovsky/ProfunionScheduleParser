@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Created by vadim on 20/12/16.
  */
-public class Record {
+public abstract class Record {
     protected String institute;
     protected String startTime;
     protected String weekDay;
@@ -46,4 +46,6 @@ public class Record {
         }
         return new String[] {teacher.trim(), cabinet};
     }
+
+    public abstract void printQuery();
 }
