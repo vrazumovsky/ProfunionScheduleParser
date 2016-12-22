@@ -20,7 +20,6 @@ public class RtfFileParser implements ScheduleParser {
     private int currentTabIndex = -1;
     private List<Integer> offsets = new ArrayList<>();
     private List<TableString> rawData = new ArrayList<>();
-    private List<String> strings = new ArrayList<>();
 
     private File file;
     private List<Record> records = new ArrayList<>();
@@ -50,9 +49,6 @@ public class RtfFileParser implements ScheduleParser {
         }
 
         rawData = new RawDataFilter(rawData).filter();
-
-//        System.out.println(rawData);
-
         records = new Records(rawData).createRecords();
 
         return records;

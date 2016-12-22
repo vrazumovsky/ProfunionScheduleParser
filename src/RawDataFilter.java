@@ -23,7 +23,11 @@ public class RawDataFilter {
 
     public List<TableString> filter() {
         for (int i = 0; i < rawData.size(); i++) {
-            if (rawData.get(i).matchesOneOf(institutes)) {
+            TableString tableString = rawData.get(i);
+            if (tableString.matchesOneOf(institutes)) {
+                if (tableString.getString().equals("безопасности") || tableString.getString().equals(" безопасности")) {
+                    tableString.setString("Правовое обеспечение национальной безопасности");
+                }
                 return rawData.subList(i, rawData.size());
             }
         }

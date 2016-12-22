@@ -21,6 +21,10 @@ public class TableString {
         return string;
     }
 
+    public void setString(String string) {
+        this.string = string;
+    }
+
     public int getTabOffset() {
         return tabOffset;
     }
