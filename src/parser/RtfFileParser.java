@@ -53,7 +53,7 @@ public class RtfFileParser implements ScheduleParser {
             return records;
         }
 
-        rawData = new RawDataFilter(rawData).filter();
+        rawData = new RawDataFilter().filter(rawData);
         records = new Records(rawData).createRecords();
 
         return records;

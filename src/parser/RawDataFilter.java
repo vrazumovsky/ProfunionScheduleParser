@@ -1,6 +1,7 @@
 package parser;
 
 import data.raw.TableString;
+import filter.Filter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by vadim on 20/12/16.
  */
-public class RawDataFilter {
+public class RawDataFilter implements Filter {
     private static final List<String> institutes;
 
     static {
@@ -19,13 +20,8 @@ public class RawDataFilter {
         institutes = Arrays.asList(institutesArray);
     }
 
-    private List<TableString> rawData;
 
-    public RawDataFilter(List<TableString> rawData) {
-        this.rawData = rawData;
-    }
-
-    public List<TableString> filter() {
+    public List<TableString> filter(List<TableString> rawData) {
         for (int i = 0; i < rawData.size(); i++) {
             TableString tableString = rawData.get(i);
             if (tableString.matchesOneOf(institutes)) {
