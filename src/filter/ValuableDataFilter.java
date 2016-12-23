@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by vadim on 20/12/16.
  */
-public class RawDataFilter implements Filter {
+public class ValuableDataFilter implements Filter {
     private static final List<String> institutes;
 
     static {
