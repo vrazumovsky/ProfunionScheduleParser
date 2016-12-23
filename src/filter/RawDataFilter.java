@@ -1,4 +1,4 @@
-package parser;
+package filter;
 
 import data.raw.TableString;
 import filter.Filter;

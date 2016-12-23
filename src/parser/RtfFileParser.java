@@ -9,6 +9,7 @@ import com.rtfparserkit.rtf.Command;
 import data.record.Record;
 import data.raw.TableString;
 import data.record.Records;
+import filter.RawDataFilter;
 
 import java.io.File;
 import java.io.FileInputStream;
