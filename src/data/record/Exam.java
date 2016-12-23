@@ -2,6 +2,7 @@ package data.record;
 
 import data.Teacher;
 import data.raw.TableString;
+import filter.ExamValuableDataFilter;
 
 import java.util.List;
 
@@ -12,27 +13,28 @@ public class Exam extends Record {
 
     String date;
 
-    public Exam(List<TableString> rawData, String institute) {
-        this.institute = institute;
-        rawData = filter(rawData);
-        date = rawData.get(0).getString();
-        weekDay = rawData.get(1).getString();
-        startTime = rawData.get(2).getString();
-        name = rawData.get(3).getString();
-        type = "экзамен";
-        tabOffset = rawData.get(3).getTabOffset();
+    public static Exam createExam(List<TableString> rawData, String institute) {
+        Exam exam = new Exam();
+
+        rawData = new ExamValuableDataFilter().filter(rawData);
+
+        exam.institute = institute;
+        exam.date = rawData.get(0).getString();
+        exam.weekDay = rawData.get(1).getString();
+        exam.startTime = rawData.get(2).getString();
+        exam.name = rawData.get(3).getString();
+        exam.type = "экзамен";
+        exam.tabOffset = rawData.get(3).getTabOffset();
 
         for (TableString tableString : rawData.subList(4, rawData.size())) {
             String[] teacherAndCabinet = Record.splitTeacherAndCabinet(tableString.getString());
             Teacher teacher = new Teacher(teacherAndCabinet[0], teacherAndCabinet[1]);
-            teachers.add(teacher);
+            exam.teachers.add(teacher);
         }
+
+        return exam;
     }
 
-    private List<TableString> filter(List<TableString> rawData) {
-        rawData.remove(4); //must have hardcode :)
-        return rawData;
-    }
 
     public void printQuery() {
 

@@ -42,7 +42,7 @@ public class SameStartTimeRecords {
             List<TableString> data = new ArrayList<>();
             data.addAll(rawDataTable.get(firstColumnKey));
             data.addAll(tableStrings.getValue());
-            Record record = new Exam(data, institute);
+            Record record = Exam.createExam(data, institute);
             records.add(record);
         }
 
