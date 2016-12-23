@@ -55,7 +55,7 @@ public class Exam extends Record {
 
     @Override
     public String toString() {
-        return "data.record.Exam{" +
+        return "Exam{" +
                 super.toString() +
                 "date='" + date + '\'' +
                 '}';

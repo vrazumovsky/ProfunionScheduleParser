@@ -22,7 +22,7 @@ public abstract class Record {
 
     @Override
     public String toString() {
-        return "data.record.Record{" +
+        return "Record{" +
                 "institute='" + institute + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", weekDay='" + weekDay + '\'' +

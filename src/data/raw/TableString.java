@@ -33,7 +33,7 @@ public class TableString {
 
     @Override
     public String toString() {
-        return "data.raw.TableString{" +
+        return "TableString{" +
                 "string='" + string + '\'' +
                 ", tabOffset=" + tabOffset +
                 '}';
