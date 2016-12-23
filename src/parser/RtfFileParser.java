@@ -8,7 +8,7 @@ import com.rtfparserkit.parser.standard.StandardRtfParser;
 import com.rtfparserkit.rtf.Command;
 import data.record.Record;
 import data.raw.TableString;
-import data.record.Records;
+import data.record.ExamRecords;
 import filter.ValuableDataFilter;
 
 import java.io.File;
@@ -55,7 +55,7 @@ public class RtfFileParser implements ScheduleParser {
         }
 
         rawData = new ValuableDataFilter().filter(rawData);
-        records = new Records(rawData).createRecords();
+        records = new ExamRecords(rawData).createRecords();
 
         return records;
     }

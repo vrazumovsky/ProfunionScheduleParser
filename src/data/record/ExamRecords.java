@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
 /**
  * Created by vadim on 20/12/16.
  */
-public class Records {
+public class ExamRecords {
 
     private static final Pattern DATE_PATTERN = Pattern.compile("[0-9]+[-][а-яА-Я]+[-][0-9]+");
     private List<TableString> rawData;
 
-    public Records(List<TableString> rawData) {
+    public ExamRecords(List<TableString> rawData) {
         this.rawData = rawData;
     }
 
