@@ -1,3 +1,7 @@
+package data.record;
+
+import data.raw.TableString;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

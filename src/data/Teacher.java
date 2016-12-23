@@ -1,3 +1,5 @@
+package data;
+
 /**
  * Created by vadim on 21/12/16.
  */

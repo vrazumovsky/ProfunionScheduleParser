@@ -1,3 +1,7 @@
+package parser;
+
+import data.raw.TableString;
+
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,9 +1,14 @@
+package parser;
+
 import com.rtfparserkit.parser.IRtfListener;
 import com.rtfparserkit.parser.IRtfParser;
 import com.rtfparserkit.parser.IRtfSource;
 import com.rtfparserkit.parser.RtfStreamSource;
 import com.rtfparserkit.parser.standard.StandardRtfParser;
 import com.rtfparserkit.rtf.Command;
+import data.record.Record;
+import data.raw.TableString;
+import data.record.Records;
 
 import java.io.File;
 import java.io.FileInputStream;

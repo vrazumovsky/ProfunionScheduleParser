@@ -1,3 +1,7 @@
+package parser;
+
+import data.record.Record;
+
 import java.util.List;
 
 /**

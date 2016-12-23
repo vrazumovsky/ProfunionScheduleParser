@@ -1,3 +1,8 @@
+package data.record;
+
+import data.Teacher;
+import data.raw.TableString;
+
 import java.util.List;
 
 /**
@@ -18,7 +23,7 @@ public class Exam extends Record {
         tabOffset = rawData.get(3).getTabOffset();
 
         for (TableString tableString : rawData.subList(4, rawData.size())) {
-            String[] teacherAndCabinet = splitTeacherAndCabinet(tableString.getString());
+            String[] teacherAndCabinet = Record.splitTeacherAndCabinet(tableString.getString());
             Teacher teacher = new Teacher(teacherAndCabinet[0], teacherAndCabinet[1]);
             teachers.add(teacher);
         }
@@ -50,7 +55,7 @@ public class Exam extends Record {
 
     @Override
     public String toString() {
-        return "Exam{" +
+        return "data.record.Exam{" +
                 super.toString() +
                 "date='" + date + '\'' +
                 '}';

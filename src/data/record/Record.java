@@ -1,3 +1,7 @@
+package data.record;
+
+import data.Teacher;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -18,7 +22,7 @@ public abstract class Record {
 
     @Override
     public String toString() {
-        return "Record{" +
+        return "data.record.Record{" +
                 "institute='" + institute + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", weekDay='" + weekDay + '\'' +

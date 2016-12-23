@@ -1,3 +1,5 @@
+package data.raw;
+
 import java.util.List;
 
 /**
@@ -31,7 +33,7 @@ public class TableString {
 
     @Override
     public String toString() {
-        return "TableString{" +
+        return "data.raw.TableString{" +
                 "string='" + string + '\'' +
                 ", tabOffset=" + tabOffset +
                 '}';

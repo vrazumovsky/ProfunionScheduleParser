@@ -1,3 +1,7 @@
+import data.record.Record;
+import parser.FilesParser;
+import parser.ScheduleParser;
+
 import java.util.List;
 
 /**
@@ -11,8 +15,6 @@ public class Main {
         ScheduleParser parser = new FilesParser(FILES_DIRECTORY);
 
         List<Record> allRecords = parser.parse();
-
-//        System.out.println(allRecords);
 
         for (Record record : allRecords) {
             record.printQuery();

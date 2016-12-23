@@ -1,3 +1,8 @@
+package data.record;
+
+
+import data.raw.TableString;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
