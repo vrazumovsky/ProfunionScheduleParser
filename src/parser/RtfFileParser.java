@@ -1,13 +1,19 @@
 package parser;
 
 import com.rtfparserkit.parser.IRtfListener;
+import com.rtfparserkit.parser.IRtfParser;
+import com.rtfparserkit.parser.IRtfSource;
+import com.rtfparserkit.parser.RtfStreamSource;
+import com.rtfparserkit.parser.standard.StandardRtfParser;
 import com.rtfparserkit.rtf.Command;
 import data.raw.TableString;
 import data.record.Record;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,12 +26,34 @@ public abstract class RtfFileParser implements ScheduleParser {
     protected List<TableString> rawData = new ArrayList<>();
 
     protected File file;
-    protected List<Record> records = new ArrayList<>();
 
     public RtfFileParser(File file) {
         this.file = file;
         System.out.println(file);
     }
+
+    @Override
+    public List<Record> parse() {
+        InputStream is = null;
+        try {
+            is = new FileInputStream(file);
+
+            IRtfSource source = new RtfStreamSource(is);
+            IRtfParser parser = new StandardRtfParser();
+            IRtfListener listener = new RtfFileParser.RtfListener();
+            parser.parse(source, listener);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (rawData.size() == 0) {
+            return new ArrayList<>();
+        }
+
+        return createRecords();
+    }
+
+    protected abstract List<Record> createRecords();
 
 
     protected class RtfListener implements IRtfListener {
