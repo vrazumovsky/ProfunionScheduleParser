@@ -15,6 +15,9 @@ public class SameStartTimeRecords {
 
     private String institute;
     private List<TableString> rawData;
+    private final List<Record> records = new ArrayList<>();
+    private final Map<Integer, List<TableString>> rawDataTable = new HashMap<>();
+    private Integer firstColumnKey;
 
     public SameStartTimeRecords(String institute, List<TableString> rawData) {
         this.institute = institute;
@@ -22,19 +25,15 @@ public class SameStartTimeRecords {
     }
 
     public List<Record> createRecords() {
-        List<Record> records = new ArrayList<>();
+        initializeFirstColumnKey();
+        prepareScheduleMap();
+        extractExamRecordsFromMap();
+        System.out.println(records);
 
-        Integer firstColumnKey = rawData.get(0).getTabOffset();
+        return records;
+    }
 
-        Map<Integer, List<TableString>> rawDataTable = new HashMap<>();
-        for (TableString tableString : rawData) {
-            Integer key = tableString.getTabOffset();
-            if (!rawDataTable.containsKey(key)) {
-                rawDataTable.put(key, new ArrayList<>());
-            }
-            rawDataTable.get(key).add(tableString);
-        }
-
+    private void extractExamRecordsFromMap() {
         for (Map.Entry<Integer, List<TableString>> tableStrings : rawDataTable.entrySet()) {
             if (tableStrings.getKey().equals(firstColumnKey)) {
                 continue;
@@ -45,9 +44,19 @@ public class SameStartTimeRecords {
             Record record = Exam.createExam(data, institute);
             records.add(record);
         }
+    }
 
-        System.out.println(records);
+    private void prepareScheduleMap() {
+        for (TableString tableString : rawData) {
+            Integer key = tableString.getTabOffset();
+            if (!rawDataTable.containsKey(key)) {
+                rawDataTable.put(key, new ArrayList<>());
+            }
+            rawDataTable.get(key).add(tableString);
+        }
+    }
 
-        return records;
+    private void initializeFirstColumnKey() {
+        firstColumnKey = rawData.get(0).getTabOffset();
     }
 }
