@@ -7,6 +7,7 @@ import data.record.Record;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public abstract class RtfFileParser implements ScheduleParser {
 
 
     protected class RtfListener implements IRtfListener {
+
+        private boolean requestClearOffets = false;
 
         @Override
         public void processDocumentStart() {
@@ -57,6 +60,14 @@ public abstract class RtfFileParser implements ScheduleParser {
                 return;
             }
             System.out.println(s);
+            for (int i = 1; i < offsets.size(); i++) {
+                if (offsets.get(i - 1) >= offsets.get(i)) {
+                    for (int k = 0; k < i; k++) {
+                        offsets.remove(0);
+                    }
+                    break;
+                }
+            }
             if (offsets.size() != 0) {
                 rawData.add(new TableString(s, offsets.get(currentTabIndex)));
             }
@@ -65,12 +76,13 @@ public abstract class RtfFileParser implements ScheduleParser {
         @Override
         public void processCommand(Command command, int i, boolean b, boolean b1) {
             String commandName = command.getCommandName();
+            System.out.println(commandName);
 
             switch (commandName) {
                 //new paragraph
                 case "par":
                     if (currentTabIndex != -1) {
-                        offsets.clear();
+                        requestClearOffets = true;
                         currentTabIndex = -1;
                     }
                     break;
@@ -82,6 +94,10 @@ public abstract class RtfFileParser implements ScheduleParser {
 
                 case "tx":
                     //tab offset value
+                    if (requestClearOffets) {
+                        offsets.clear();
+                        requestClearOffets = false;
+                    }
                     offsets.add(i);
                     break;
             }
