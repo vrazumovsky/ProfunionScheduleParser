@@ -8,7 +8,7 @@ import com.rtfparserkit.parser.standard.StandardRtfParser;
 import com.rtfparserkit.rtf.Command;
 import data.record.Record;
 import data.raw.TableString;
-import data.record.ExamRecords;
+import data.record.Records;
 import filter.ValuableDataFilter;
 
 import java.io.File;
@@ -46,7 +46,7 @@ public class ExamRtfFileParser extends RtfFileParser {
         }
 
         rawData = new ValuableDataFilter().filter(rawData);
-        records = new ExamRecords(rawData).createRecords();
+        records = new Records(rawData).createExamRecords();
 
         return records;
     }
