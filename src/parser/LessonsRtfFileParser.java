@@ -9,11 +9,11 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Created by vadim on 20/12/16.
+ * Created by vadim on 27/01/17.
  */
-public class ExamRtfFileParser extends RtfFileParser {
+public class LessonsRtfFileParser extends RtfFileParser {
 
-    public ExamRtfFileParser(File file) {
+    public LessonsRtfFileParser(File file) {
         super(file);
     }
 
@@ -21,6 +21,6 @@ public class ExamRtfFileParser extends RtfFileParser {
     @Override
     protected List<Record> createRecords() {
         rawData = new ValuableDataFilter().filter(rawData);
-        return  new Records(rawData).createExamRecords();
+        return  new Records(rawData).createLessonRecords();
     }
 }
