@@ -106,7 +106,7 @@ public abstract class RtfFileParser implements ScheduleParser {
         @Override
         public void processCommand(Command command, int i, boolean b, boolean b1) {
             String commandName = command.getCommandName();
-            System.out.println(commandName);
+//            System.out.println(commandName);
 
             switch (commandName) {
                 //new paragraph
