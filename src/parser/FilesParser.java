@@ -24,7 +24,7 @@ public class FilesParser implements ScheduleParser {
     @Override
     public List<Record> parse() {
         for (File file : directory.listFiles()) {
-            ScheduleParser parser = new RtfFileParser(file);
+            ScheduleParser parser = new ExamRtfFileParser(file);
             recordsFromAllFiles.addAll(parser.parse());
         }
         return recordsFromAllFiles;

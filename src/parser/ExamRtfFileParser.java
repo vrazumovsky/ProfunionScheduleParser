@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by vadim on 20/12/16.
  */
-public class RtfFileParser implements ScheduleParser {
+public class ExamRtfFileParser implements ScheduleParser {
 
     private int currentTabIndex = -1;
     private List<Integer> offsets = new ArrayList<>();
@@ -30,7 +30,7 @@ public class RtfFileParser implements ScheduleParser {
     private File file;
     private List<Record> records = new ArrayList<>();
 
-    public RtfFileParser(File file) {
+    public ExamRtfFileParser(File file) {
         this.file = file;
         System.out.println(file);
     }
@@ -60,7 +60,7 @@ public class RtfFileParser implements ScheduleParser {
         return records;
     }
 
-    private class RtfListener implements IRtfListener {
+    protected class RtfListener implements IRtfListener {
 
         @Override
         public void processDocumentStart() {
