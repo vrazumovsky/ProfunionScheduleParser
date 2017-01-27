@@ -5,9 +5,7 @@ import com.rtfparserkit.parser.IRtfParser;
 import com.rtfparserkit.parser.IRtfSource;
 import com.rtfparserkit.parser.RtfStreamSource;
 import com.rtfparserkit.parser.standard.StandardRtfParser;
-import com.rtfparserkit.rtf.Command;
 import data.record.Record;
-import data.raw.TableString;
 import data.record.Records;
 import filter.ValuableDataFilter;
 
@@ -15,7 +13,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
