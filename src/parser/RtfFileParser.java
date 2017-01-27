@@ -21,11 +21,9 @@ import java.util.List;
  */
 public abstract class RtfFileParser implements ScheduleParser {
 
-    protected int currentTabIndex = -1;
-    protected List<Integer> offsets = new ArrayList<>();
     protected List<TableString> rawData = new ArrayList<>();
 
-    protected File file;
+    private File file;
 
     public RtfFileParser(File file) {
         this.file = file;
@@ -56,9 +54,13 @@ public abstract class RtfFileParser implements ScheduleParser {
     protected abstract List<Record> createRecords();
 
 
-    protected class RtfListener implements IRtfListener {
+    private class RtfListener implements IRtfListener {
 
+        private int currentTabIndex = -1;
         private boolean requestClearOffets = false;
+
+        private List<Integer> offsets = new ArrayList<>();
+
 
         @Override
         public void processDocumentStart() {
