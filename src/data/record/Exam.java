@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Exam extends Record {
 
-    String date;
+    private String date;
 
     public static Exam createExam(List<TableString> rawData, String institute) {
         Exam exam = new Exam();
