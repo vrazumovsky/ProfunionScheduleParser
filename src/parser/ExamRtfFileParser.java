@@ -24,29 +24,10 @@ public class ExamRtfFileParser extends RtfFileParser {
         super(file);
     }
 
+
     @Override
-    public List<Record> parse() {
-        InputStream is = null;
-        try {
-            is = new FileInputStream(file);
-
-            IRtfSource source = new RtfStreamSource(is);
-            IRtfParser parser = new StandardRtfParser();
-            IRtfListener listener = new RtfFileParser.RtfListener();
-            parser.parse(source, listener);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (rawData.size() == 0) {
-            return records;
-        }
-
+    protected List<Record> createRecords() {
         rawData = new ValuableDataFilter().filter(rawData);
-        records = new Records(rawData).createExamRecords();
-
-        return records;
+        return  new Records(rawData).createExamRecords();
     }
-
-
 }
