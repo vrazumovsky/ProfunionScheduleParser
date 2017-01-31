@@ -2,6 +2,8 @@ package data.record;
 
 import data.Teacher;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -51,5 +53,5 @@ public abstract class Record {
         return new String[] {teacher.trim(), cabinet};
     }
 
-    public abstract void printQuery();
+    public abstract void printQuery() throws FileNotFoundException, IOException;
 }

@@ -89,7 +89,7 @@ public abstract class RtfFileParser implements ScheduleParser {
             if (currentTabIndex == -1) {
                 return;
             }
-            System.out.println(s);
+//            System.out.println(s);
             for (int i = 1; i < offsets.size(); i++) {
                 if (offsets.get(i - 1) >= offsets.get(i)) {
                     for (int k = 0; k < i; k++) {
