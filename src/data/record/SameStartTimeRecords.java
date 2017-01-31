@@ -75,12 +75,18 @@ public class SameStartTimeRecords {
 
     private void prepareScheduleMap() {
         rawDataTable.put(firstColumnKey, rawData.subList(0, 2));
-        for (TableString tableString : rawData.subList(2, rawData.size())) {
-            Integer key = tableString.getTabOffset();
+        List<TableString> subList = rawData.subList(2, rawData.size());
+        for (int i = 0; i < subList.size(); i++) {
+            Integer key = subList.get(i).getTabOffset();
             if (!rawDataTable.containsKey(key)) {
                 rawDataTable.put(key, new ArrayList<>());
             }
-            rawDataTable.get(key).add(tableString);
+            //crutch, it occurs when there are errors in data (they should be fixed)
+            if (key.equals(firstColumnKey)) {
+                throw new IllegalStateException();
+            } else {
+                rawDataTable.get(key).add(subList.get(i));
+            }
         }
     }
 
