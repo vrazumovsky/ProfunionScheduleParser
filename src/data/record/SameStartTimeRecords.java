@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by vadim on 20/12/16.
@@ -35,12 +36,71 @@ public class SameStartTimeRecords {
     }
 
     public List<Record> createLessonRecords() {
+        if (evenOddCheck()) {
+            return createEvenOddLessonRecords();
+        } else {
+            return createSimpleLessonRecords();
+        }
+    }
+
+    private List<Record> createEvenOddLessonRecords() {
+        int secondPartIndex = calculateRawDataSecondPartIndex();
+        List<TableString> rawDataFirst = rawData.subList(0, secondPartIndex);
+        List<Record> records = new SameStartTimeRecords(institute, rawDataFirst).createLessonRecords();
+        List<TableString> rawDataSecond = createRawDataSecondPart(secondPartIndex);
+        records.addAll(new SameStartTimeRecords(institute, rawDataSecond).createLessonRecords());
+        return records;
+    }
+
+    private List<TableString> createRawDataSecondPart(int secondPartIndex) {
+        List<TableString> rawDataSecond = new ArrayList<>();
+        rawDataSecond.add(rawData.get(0));
+        rawDataSecond.addAll(rawData.subList(secondPartIndex, rawData.size()));
+        return rawDataSecond;
+    }
+
+    private int calculateRawDataSecondPartIndex() {
+        //skip week day and first start time
+        for (int i = 2; i < rawData.size(); i++) {
+            if (isStartTime(rawData.get(i).getString())) {
+                return i;
+            }
+        }
+        throw new IllegalStateException();
+    }
+
+
+
+    private List<Record> createSimpleLessonRecords() {
         initializeFirstColumnKey();
         prepareScheduleMap();
         extractLessonRecordsFromMap();
-        System.out.println(records);
-
         return records;
+    }
+
+
+    static Pattern pattern = Pattern.compile("[0-9]{2}[\\.][0-9]{2}");
+
+    private boolean isStartTime(String s) {
+        return pattern.matcher(s).matches();
+    }
+
+
+    private boolean evenOddCheck() {
+        boolean even = false;
+        boolean odd = false;
+        for (TableString tableString : rawData) {
+            String string = tableString.getString();
+            if (string.equalsIgnoreCase("неч")) {
+                odd = true;
+            } else if (string.equalsIgnoreCase("чет")) {
+                even = true;
+            }
+            if (even && odd) {
+                return true;
+            }
+        }
+        return even && odd;
     }
 
     private void extractExamRecordsFromMap() {
