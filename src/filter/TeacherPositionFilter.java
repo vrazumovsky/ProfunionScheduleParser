@@ -19,10 +19,16 @@ public class TeacherPositionFilter implements Filter {
         List<TableString> tempData = new ArrayList<>();
         tempData.addAll(data);
 
+        List<TableString> objectsToDelete = new ArrayList<>();
+
         for (TableString tableString : tempData) {
             if (tableString.matchesOneOf(positionsList)) {
-                tempData.remove(tableString);
+                objectsToDelete.add(tableString);
             }
+        }
+
+        for (TableString tableString : objectsToDelete) {
+            tempData.remove(tableString);
         }
         return tempData;
     }
