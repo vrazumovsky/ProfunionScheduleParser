@@ -89,17 +89,29 @@ public class SameStartTimeRecords {
     private boolean evenOddCheck() {
         boolean even = false;
         boolean odd = false;
-        for (TableString tableString : rawData) {
-            String string = tableString.getString();
+        int index = 0;
+        for (int i = 0; i < rawData.size(); i++) {
+            String string = rawData.get(i).getString();
             if (string.equalsIgnoreCase("неч")) {
                 odd = true;
+                index = i;
             } else if (string.equalsIgnoreCase("чет")) {
                 even = true;
+                index = i;
             }
             if (even && odd) {
                 return true;
             }
         }
+
+        if (even ^ odd) {
+            TableString evenOddTableString = rawData.remove(index);
+            //after week day and start time
+            rawData.add(2, evenOddTableString);
+        } else if (!(even || odd)) {
+            rawData.add(2, new TableString("all", 0));
+        }
+
         return even && odd;
     }
 
@@ -124,7 +136,7 @@ public class SameStartTimeRecords {
             List<TableString> data = new ArrayList<>();
             data.addAll(rawDataTable.get(firstColumnKey));
             data.addAll(tableStrings.getValue());
-            if (data.size() < 5) {
+            if (data.size() < 6) {
                 //do nothing
             } else {
                 Record record = Lesson.createLesson(data, institute);
@@ -133,9 +145,12 @@ public class SameStartTimeRecords {
         }
     }
 
+    //week day, start time and even odd
+    private static int GENERAL_ITEMS_NUMBER = 3;
+
     private void prepareScheduleMap() {
-        rawDataTable.put(firstColumnKey, rawData.subList(0, 2));
-        List<TableString> subList = rawData.subList(2, rawData.size());
+        rawDataTable.put(firstColumnKey, rawData.subList(0, GENERAL_ITEMS_NUMBER));
+        List<TableString> subList = rawData.subList(GENERAL_ITEMS_NUMBER, rawData.size());
         for (int i = 0; i < subList.size(); i++) {
             Integer key = subList.get(i).getTabOffset();
             if (!rawDataTable.containsKey(key)) {
